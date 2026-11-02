@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMI Pendidikan Pancasila Kelas IX - Hak dan Kewajiban Warga Negara</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandRed: '#D32F2F',
+                        brandRedDark: '#9A0007',
+                        brandRedLight: '#FF6659',
+                        brandGold: '#FFD700',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+        }
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #d32f2f;
+            border-radius: 4px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col justify-between selection:bg-brandRed selection:text-white">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="bg-gradient-to-r from-brandRedDark via-brandRed to-red-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showSection('landing')">
+                <div class="bg-white p-2 rounded-full shadow-md">
+                    <i class="fa-solid fa-[#FFD700] fa-shield-halved text-brandRed text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight tracking-wide">PENDIDIKAN PANCASILA</h1>
+                    <p class="text-xs text-red-100 font-light">Kelas IX SMP / Fase D</p>
+                </div>
+            </div>
+
+            <!-- User Badge (Hidden initially) -->
+            <div id="userBadge" class="hidden items-center bg-red-800/60 backdrop-blur border border-white/20 px-4 py-1.5 rounded-full">
+                <i class="fa-solid fa-user-graduate text-brandGold mr-2"></i>
+                <span id="displayStudentName" class="text-sm font-semibold">Siswa</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-grow w-full">
+
+        <!-- 1. LANDING PAGE / HOMEPAGE -->
+        <section id="landing" class="animate-fade-in flex flex-col items-center justify-center min-h-[80vh] text-center">
+            <div class="glass-card p-8 md:p-12 rounded-3xl shadow-2xl border border-red-100 max-w-3xl w-full relative overflow-hidden">
+                <div class="absolute -top-12 -right-12 w-40 h-40 bg-red-100 rounded-full blur-2xl opacity-70"></div>
+                <div class="absolute -bottom-12 -left-12 w-40 h-40 bg-red-200 rounded-full blur-2xl opacity-70"></div>
+
+                <!-- Ilustrasi Garuda / Pancasila -->
+                <div class="mb-6 relative inline-block">
+                    <div class="w-28 h-28 bg-gradient-to-tr from-brandRed to-red-500 rounded-2xl flex items-center justify-center shadow-xl mx-auto transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                        <i class="fa-solid fa-eagle text-brandGold text-6xl drop-shadow-md"></i>
+                    </div>
+                </div>
+
+                <span class="inline-block px-4 py-1 bg-red-100 text-brandRed font-semibold text-xs rounded-full uppercase tracking-wider mb-3">
+                    MEDIA PEMBELAJARAN INTERAKTIF (PMI)
+                </span>
+                
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
+                    Menghormati Hak & Kewajiban Warga Negara
+                </h2>
+                <p class="text-slate-600 text-sm md:text-base max-w-xl mx-auto mb-8">
+                    Mari pelajari bersama bagaimana memahami, melaksanakan, dan menghormati hak serta kewajiban kita sebagai Warga Negara Indonesia yang baik!
+                </p>
+
+                <!-- Input Nama Siswa -->
+                <div class="max-w-md mx-auto mb-8 bg-slate-50 p-4 rounded-2xl border border-slate-200 shadow-inner">
+                    <label for="studentNameInput" class="block text-sm font-semibold text-slate-700 mb-2 text-left">
+                        <i class="fa-solid fa-id-card text-brandRed mr-1"></i> Masukkan Nama Lengkap Kamu:
+                    </label>
+                    <input type="text" id="studentNameInput" placeholder="Contoh: Budi Santoso" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brandRed focus:border-transparent text-sm transition">
+                </div>
+
+                <!-- Action Button -->
+                <button onclick="startApp()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brandRed to-red-600 hover:from-red-700 hover:to-brandRedDark text-white font-bold text-base rounded-2xl shadow-lg hover:shadow-red-500/30 transform hover:-translate-y-0.5 transition duration-200 flex items-center justify-center mx-auto space-x-2">
+                    <span>MULAI BELAJAR</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. MAIN DASHBOARD / MENU UTAMA -->
+        <section id="dashboard" class="hidden animate-fade-in space-y-8">
+            <!-- Welcome Header -->
+            <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-red-950 text-white p-6 md:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <span class="text-brandGold font-semibold text-sm uppercase tracking-wider">Selamat Datang!</span>
+                    <h2 class="text-2xl md:text-3xl font-bold mt-1">Halo, <span id="dashStudentName" class="text-brandGold">Siswa</span>! 👋</h2>
+                    <p class="text-slate-300 text-sm mt-2 max-w-xl">
+                        Pilih menu di bawah ini untuk memulai petualangan belajar Pendidikan Pancasila. Selesaikan materi, jalankan simulasi, dan uji pemahamanmu pada latihan soal!
+                    </p>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="showSection('petunjuk')" class="bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white px-4 py-2.5 rounded-xl text-sm font-medium transition flex items-center">
+                        <i class="fa-solid fa-circle-info mr-2 text-brandGold"></i> Petunjuk
+                    </button>
+                    <button onclick="showSection('tujuan')" class="bg-white/10 hover:bg-white/20 backdrop-blur border border-white/20 text-white px-4 py-2.5 rounded-xl text-sm font-medium transition flex items-center">
+                        <i class="fa-solid fa-bullseye mr-2 text-brandGold"></i> Tujuan
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1: Materi Pembelajaran -->
+                <div onclick="showSection('materi')" class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-red-100 text-brandRed rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:bg-brandRed group-hover:text-white transition">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 group-hover:text-brandRed transition">1. Modul Materi Interaktif</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                        Pelajari pengertian, hak & kewajiban, pasal UUD 1945, contoh penerapan, dan sikap menghormati hak orang lain.
+                    </p>
+                </div>
+
+                <!-- Card 2: Media Video -->
+                <div onclick="showSection('video')" class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-circle-play"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 group-hover:text-blue-600 transition">2. Video & Visual</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                        Tonton tayangan edukatif dan ilustrasi visual mengenai penerapan hak dan kewajiban warga negara.
+                    </p>
+                </div>
+
+                <!-- Card 3: Aktivitas Interaktif -->
+                <div onclick="showSection('aktivitas')" class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer group">
+                    <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:bg-amber-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 group-hover:text-amber-600 transition">3. Aktivitas & Simulasi</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                        Uji ketangkasanmu dengan aktivitas mencocokkan pasangan hak & kewajiban serta analisis studi kasus.
+                    </p>
+                </div>
+
+                <!-- Card 4: Latihan Soal -->
+                <div onclick="startQuiz()" class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer group sm:col-span-2 lg:col-span-3 bg-gradient-to-r from-red-500 to-brandRed text-white">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center text-2xl text-white">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl text-white">4. Evaluation Test (20 Soal Pilihan Ganda)</h3>
+                                <p class="text-xs text-red-100 mt-1">Uji pemahamanmu secara menyeluruh dengan pembahasan instan dan skor otomatis.</p>
+                            </div>
+                        </div>
+                        <span class="px-6 py-3 bg-white text-brandRed font-bold text-sm rounded-xl shadow group-hover:bg-brandGold group-hover:text-slate-900 transition">
+                            Mulai Evaluasi <i class="fa-solid fa-chevron-right ml-1"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. PETUNJUK PENGGUNAAN SECTION -->
+        <section id="petunjuk" class="hidden animate-fade-in space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-slate-800"><i class="fa-solid fa-circle-info text-brandRed mr-2"></i> Petunjuk Penggunaan</h2>
+                <button onclick="showSection('dashboard')" class="text-sm bg-slate-200 hover:bg-slate-300 px-4 py-2 rounded-xl transition font-medium">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Dashboard
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-red-100 text-brandRed rounded-lg flex items-center justify-center font-bold flex-shrink-0">1</div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">Navigasi Utama</h4>
+                            <p class="text-xs text-slate-500 mt-1">Gunakan tombol-tombol menu pada Dashboard untuk berpindah antar materi, video, aktivitas, dan evaluasi latihan soal.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-red-100 text-brandRed rounded-lg flex items-center justify-center font-bold flex-shrink-0">2</div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">Mempelajari Materi</h4>
+                            <p class="text-xs text-slate-500 mt-1">Gunakan tab navigasi di dalam menu Materi untuk menjelajahi Pengertian, Pasal UUD 1945, hingga Contoh Penerapan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-red-100 text-brandRed rounded-lg flex items-center justify-center font-bold flex-shrink-0">3</div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">Mengerjakan Latihan Soal</h4>
+                            <p class="text-xs text-slate-500 mt-1">Terdapat 20 soal pilihan ganda. Pilih 1 jawaban yang paling benar. Umpan balik dan pembahasannya akan langsung muncul seketika!</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-red-100 text-brandRed rounded-lg flex items-center justify-center font-bold flex-shrink-0">4</div>
+                        <div>
+                            <h4 class="font-semibold text-slate-800">Melihat Hasil Evaluasi</h4>
+                            <p class="text-xs text-slate-500 mt-1">Setelah menyelesaikan 20 soal, sistem akan menghitung nilai akhir secara otomatis (Skala 0-100) beserta predikat & rekomendasi belajar.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. TUJUAN PEMBELAJARAN SECTION -->
+        <section id="tujuan" class="hidden animate-fade-in space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-slate-800"><i class="fa-solid fa-bullseye text-brandRed mr-2"></i> Tujuan Pembelajaran (Fase D / Kelas IX)</h2>
+                <button onclick="showSection('dashboard')" class="text-sm bg-slate-200 hover:bg-slate-300 px-4 py-2 rounded-xl transition font-medium">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Dashboard
+                </button>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-slate-100">
+                <p class="text-sm text-slate-600 mb-6 leading-relaxed">
+                    Setelah menyelesaikan seluruh rangkaian pembelajaran dalam media interaktif ini, peserta didik diharapkan mampu mencapai indikator capaian berikut:
+                </p>
+
+                <div class="space-y-4">
+                    <div class="p-4 rounded-xl bg-slate-50 border-l-4 border-brandRed flex items-center space-x-3">
+                        <i class="fa-solid fa-circle-check text-brandRed"></i>
+                        <span class="text-sm text-slate-700 font-medium">Menjelaskan pengertian hak dan kewajiban warga negara secara komprehensif.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border-l-4 border-brandRed flex items-center space-x-3">
+                        <i class="fa-solid fa-circle-check text-brandRed"></i>
+                        <span class="text-sm text-slate-700 font-medium">Mengidentifikasi hak dan kewajiban warga negara berdasarkan landasan hukum yang berlaku.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border-l-4 border-brandRed flex items-center space-x-3">
+                        <i class="fa-solid fa-circle-check text-brandRed"></i>
+                        <span class="text-sm text-slate-700 font-medium">Menjelaskan hubungan kausalitas dan keseimbangan antara hak dan kewajiban.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border-l-4 border-brandRed flex items-center space-x-3">
+                        <i class="fa-solid fa-circle-check text-brandRed"></i>
+                        <span class="text-sm text-slate-700 font-medium">Mengidentifikasi contoh bentuk pelanggaran hak dan pengabaian kewajiban dalam masyarakat.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border-l-4 border-brandRed flex items-center space-x-3">
+                        <i class="fa-solid fa-circle-check text-brandRed"></i>
+                        <span class="text-sm text-slate-700 font-medium">Menunjukkan perilaku aktif dalam menghormati hak orang lain dan memenuhi kewajiban sehari-hari.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MODUL MATERI SECTION -->
+        <section id="materi" class="hidden animate-fade-in space-y-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800"><i class="fa-solid fa-book-bookmark text-brandRed mr-2"></i> Modul Materi Pembelajaran</h2>
+                    <p class="text-xs text-slate-500">Pilih sub-materi di bawah untuk membaca ringkasan interaktif.</p>
+                </div>
+                <button onclick="showSection('dashboard')" class="text-sm bg-slate-200 hover:bg-slate-300 px-4 py-2 rounded-xl transition font-medium">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Dashboard
+                </button>
+            </div>
+
+            <!-- Material Tabs Nav -->
+            <div class="flex overflow-x-auto space-x-2 pb-2 custom-scroll border-b border-slate-200">
+                <button onclick="switchMaterialTab('mat1')" id="tab-mat1" class="mat-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap bg-brandRed text-white shadow">
+                    1. Pengertian Dasar
+                </button>
+                <button onclick="switchMaterialTab('mat2')" id="tab-mat2" class="mat-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100">
+                    2. Hak & Kewajiban WN
+                </button>
+                <button onclick="switchMaterialTab('mat3')" id="tab-mat3" class="mat-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100">
+                    3. Pasal UUD 1945
+                </button>
+                <button onclick="switchMaterialTab('mat4')" id="tab-mat4" class="mat-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100">
+                    4. Penerapan Sehari-hari
+                </button>
+                <button onclick="switchMaterialTab('mat5')" id="tab-mat5" class="mat-tab px-4 py-2.5 rounded-xl font-medium text-sm whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100">
+                    5. Menghormati Hak Orang Lain
+                </button>
+            </div>
+
+            <!-- Material Content Panels -->
+            <div id="mat-content-container" class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-slate-100">
+                <!-- Sub Materi 1 -->
+                <div id="mat1" class="mat-panel space-y-6">
+                    <h3 class="text-xl font-bold text-brandRed border-b pb-2">Sub 1: Pengertian Hak dan Kewajiban</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-5 bg-red-50 rounded-2xl border border-red-100">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <i class="fa-solid fa-hand-holding-heart text-2xl text-brandRed"></i>
+                                <h4 class="font-bold text-lg text-slate-800">Apa itu Hak?</h4>
+                            </div>
+                            <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+                                **Hak** adalah segala sesuatu yang mutlak menjadi milik seseorang dan penggunaannya tergantung kepada kita sendiri, yang dijamin oleh hukum dan norma sosial.
+                            </p>
+                        </div>
+                        <div class="p-5 bg-blue-50 rounded-2xl border border-blue-100">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <i class="fa-solid fa-scale-balanced text-2xl text-blue-600"></i>
+                                <h4 class="font-bold text-lg text-slate-800">Apa itu Kewajiban?</h4>
+                            </div>
+                            <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+                                **Kewajiban** adalah sesuatu yang harus dilaksanakan dengan penuh rasa tanggung jawab sebelum seseorang dapat menuntut haknya.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200">
+                        <h4 class="font-bold text-slate-800 mb-2"><i class="fa-solid fa-link text-brandRed mr-2"></i> Hubungan Antara Hak dan Kewajiban</h4>
+                        <p class="text-xs md:text-sm text-slate-600 leading-relaxed">
+                            Hak dan kewajiban memiliki hubungan kausalitas (sebab-akibat) yang saling terikat. Seseorang mendapatkan haknya karena telah memenuhi kewajibannya. Pemenuhan keduanya secara seimbang merupakan kunci terciptanya kedamaian dan keadilan sosial.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sub Materi 2 -->
+                <div id="mat2" class="mat-panel hidden space-y-6">
+                    <h3 class="text-xl font-bold text-brandRed border-b pb-2">Sub 2: Hak dan Kewajiban Warga Negara</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold text-slate-800 mb-3 text-brandRed"><i class="fa-solid fa-circle-check mr-2"></i> Contoh Hak Warga Negara</h4>
+                            <ul class="space-y-2 text-xs md:text-sm text-slate-600">
+                                <li class="p-3 bg-slate-50 rounded-xl flex items-start"><i class="fa-solid fa-graduation-cap text-brandRed mr-2 mt-1"></i> Hak memperoleh pendidikan yang layak.</li>
+                                <li class="p-3 bg-slate-50 rounded-xl flex items-start"><i class="fa-solid fa-shield-cat text-brandRed mr-2 mt-1"></i> Hak mendapatkan perlindungan hukum yang adil.</li>
+                                <li class="p-3 bg-slate-50 rounded-xl flex items-start"><i class="fa-solid fa-comments text-brandRed mr-2 mt-1"></i> Hak menyampaikan pendapat sesuai ketentuan undang-undang.</li>
+                                <li class="p-3 bg-slate-50 rounded-xl flex items-start"><i class="fa-solid fa-tree text-brandRed mr-2 mt-1"></i> Hak menikmati lingkungan hidup yang bersih dan sehat.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 mb-3 text-blue-600"><i class="fa-solid fa-circle-exclamation mr-2"></i> Contoh Kewajiban Warga Negara</h4>
+                            <ul class="space-y-2 text-xs md:text-sm text-slate-600">
+                                <li class="p-3 bg-slate-50 rounded-xl flex items-start"><i class="fa-solid fa-gavel text-blue-600 mr-2 mt-1"></i> Kewajiban menaati hukum dan pemerintahan yang berlaku.</li>
+                                <li class="p-3 bg-slate-50 rounded-xl flex items-start"><i class="fa-solid fa-hands-holding-child text-blue-600 mr-2 mt-1"></i> Kewajiban menghormati hak asasi orang lain.</li>
+                                <li class="p-3 bg-slate-50 rounded-xl flex items-start"><i class="fa-solid fa-flag text-blue-600 mr-2 mt-1"></i> Kewajiban ikut serta dalam upaya pembelaan negara.</li>
+                                <li class="p-3 bg-slate-50 rounded-xl flex items-start"><i class="fa-solid fa-users text-blue-600 mr-2 mt-1"></i> Kewajiban menjaga ketertiban umum dan persatuan nasional.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub Materi 3 -->
+                <div id="mat3" class="mat-panel hidden space-y-6">
+                    <h3 class="text-xl font-bold text-brandRed border-b pb-2">Sub 3: Landasan Konstitusional (UUD NRI 1945)</h3>
+                    <p class="text-xs md:text-sm text-slate-600">Berikut adalah rumusan pasal-pasal UUD 1945 yang mengatur hak dan kewajiban warga negara:</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="px-2.5 py-1 bg-brandRed text-white text-xs font-bold rounded-md">Pasal 27 Ayat (1)</span>
+                            <p class="text-xs text-slate-600 mt-2">Segala warga negara bersamaan kedudukannya di dalam hukum dan pemerintahan wajib menjunjung hukum dan pemerintahan itu.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="px-2.5 py-1 bg-brandRed text-white text-xs font-bold rounded-md">Pasal 27 Ayat (3)</span>
+                            <p class="text-xs text-slate-600 mt-2">Setiap warga negara berhak dan wajib ikut serta dalam upaya pembelaan negara.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="px-2.5 py-1 bg-brandRed text-white text-xs font-bold rounded-md">Pasal 28A – 28J</span>
+                            <p class="text-xs text-slate-600 mt-2">Jaminan lengkap mengenai Hak Asasi Manusia (HAM) meliputi hak hidup, berkeluarga, kebebasan berpendapat, dll.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="px-2.5 py-1 bg-brandRed text-white text-xs font-bold rounded-md">Pasal 29 Ayat (2)</span>
+                            <p class="text-xs text-slate-600 mt-2">Negara menjamin kemerdekaan tiap-tiap penduduk untuk memeluk agamanya masing-masing dan beribadat menurut agamanya.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="px-2.5 py-1 bg-brandRed text-white text-xs font-bold rounded-md">Pasal 30 Ayat (1)</span>
+                            <p class="text-xs text-slate-600 mt-2">Tiap-tiap warga negara berhak dan wajib ikut serta dalam usaha pertahanan dan keamanan negara.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="px-2.5 py-1 bg-brandRed text-white text-xs font-bold rounded-md">Pasal 31 (1) & (2)</span>
+                            <p class="text-xs text-slate-600 mt-2">Setiap warga negara berhak mendapat pendidikan & wajib mengikuti pendidikan dasar yang dibiayai pemerintah.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub Materi 4 -->
+                <div id="mat4" class="mat-panel hidden space-y-6">
+                    <h3 class="text-xl font-bold text-brandRed border-b pb-2">Sub 4: Contoh Penerapan dalam Kehidupan</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 border rounded-xl bg-slate-50">
+                            <h4 class="font-bold text-slate-800 text-sm mb-2"><i class="fa-solid fa-house-chimney text-brandRed mr-2"></i> Lingkungan Keluarga</h4>
+                            <p class="text-xs text-slate-600">Menghormati orang tua, mendapatkan kasih sayang, serta menjaga kebersihan rumah bersama.</p>
+                        </div>
+                        <div class="p-4 border rounded-xl bg-slate-50">
+                            <h4 class="font-bold text-slate-800 text-sm mb-2"><i class="fa-solid fa-school text-brandRed mr-2"></i> Lingkungan Sekolah</h4>
+                            <p class="text-xs text-slate-600">Mendapatkan ilmu dari guru, menaati tata tertib sekolah, dan tidak merusak fasilitas kelas.</p>
+                        </div>
+                        <div class="p-4 border rounded-xl bg-slate-50">
+                            <h4 class="font-bold text-slate-800 text-sm mb-2"><i class="fa-solid fa-city text-brandRed mr-2"></i> Lingkungan Masyarakat</h4>
+                            <p class="text-xs text-slate-600">Ikut kegiatan kerja bakti, tidak membuang sampah sembarangan, serta menghormati tetangga.</p>
+                        </div>
+                        <div class="p-4 border rounded-xl bg-slate-50">
+                            <h4 class="font-bold text-slate-800 text-sm mb-2"><i class="fa-solid fa-flag text-brandRed mr-2"></i> Berbangsa & Bernegara</h4>
+                            <p class="text-xs text-slate-600">Membayar pajak tepat waktu, mematuhi peraturan lalu lintas, dan menjunjung norma Pancasila.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub Materi 5 -->
+                <div id="mat5" class="mat-panel hidden space-y-6">
+                    <h3 class="text-xl font-bold text-brandRed border-b pb-2">Sub 5: Menghormati Hak Orang Lain</h3>
+                    <p class="text-xs md:text-sm text-slate-600">Sikap-sikap positif yang mencerminkan upaya menghormati hak orang lain:</p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100 flex items-start space-x-3">
+                            <i class="fa-solid fa-thumbs-up text-emerald-600 mt-1"></i>
+                            <div>
+                                <h5 class="font-semibold text-xs text-slate-800">Menghargai Perbedaan Pendapat</h5>
+                                <p class="text-[11px] text-slate-500 mt-1">Mendengarkan gagasan orang lain saat bermusyawarah tanpa memotong pembicaraan.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100 flex items-start space-x-3">
+                            <i class="fa-solid fa-ban text-emerald-600 mt-1"></i>
+                            <div>
+                                <h5 class="font-semibold text-xs text-slate-800">Tidak Melakukan Perundungan</h5>
+                                <p class="text-[11px] text-slate-500 mt-1">Menjauhi aksi *bullying* baik fisik, verbal, maupun di media sosial.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100 flex items-start space-x-3">
+                            <i class="fa-solid fa-place-of-worship text-emerald-600 mt-1"></i>
+                            <div>
+                                <h5 class="font-semibold text-xs text-slate-800">Menghormati Kebebasan Beragama</h5>
+                                <p class="text-[11px] text-slate-500 mt-1">Tidak mengganggu jalannya ibadah teman pemeluk agama lain.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. VIDEO DAN ILUSTRASI SECTION -->
+        <section id="video" class="hidden animate-fade-in space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-slate-800"><i class="fa-solid fa-play text-brandRed mr-2"></i> Media Video & Visual Pembelajaran</h2>
+                <button onclick="showSection('dashboard')" class="text-sm bg-slate-200 hover:bg-slate-300 px-4 py-2 rounded-xl transition font-medium">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Dashboard
+                </button>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 space-y-6">
+                <!-- Video Container -->
+                <div class="aspect-video w-full max-w-4xl mx-auto bg-black rounded-2xl overflow-hidden shadow-lg relative">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video Pembelajaran Hak dan Kewajiban" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-xl text-center">
+                    <p class="text-xs text-slate-500">
+                        *Catatan: Video di atas dapat diganti dengan materi video Pendidikan Pancasila kelas IX dari YouTube Kementerian Pendidikan atau kanal pembelajaran sekolah.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. AKTIVITAS INTERAKTIF SECTION -->
+        <section id="aktivitas" class="hidden animate-fade-in space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-bold text-slate-800"><i class="fa-solid fa-puzzle-piece text-brandRed mr-2"></i> Aktivitas & Game Interaktif</h2>
+                <button onclick="showSection('dashboard')" class="text-sm bg-slate-200 hover:bg-slate-300 px-4 py-2 rounded-xl transition font-medium">
+                    <i class="fa-solid fa-arrow-left mr-1"></i> Dashboard
+                </button>
+            </div>
+
+            <!-- Mini Game: Klasifikasi Hak vs Kewajiban -->
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-slate-100 space-y-6">
+                <h3 class="font-bold text-lg text-slate-800">Simulasi: Tentukan Apakah Ini Hak atau Kewajiban!</h3>
+                <p class="text-xs text-slate-500">Klik pada kategori yang tepat untuk setiap pernyataan di bawah ini:</p>
+
+                <div class="space-y-4 max-w-2xl mx-auto">
+                    <!-- Item 1 -->
+                    <div class="p-4 border rounded-xl bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <span class="text-xs font-semibold text-slate-700">1. Mendapatkan bimbingan dan pengajaran dari guru di sekolah.</span>
+                        <div class="flex space-x-2">
+                            <button onclick="checkActivity(this, true)" class="px-3 py-1.5 bg-slate-200 hover:bg-emerald-500 hover:text-white rounded-lg text-xs font-medium transition">HAK</button>
+                            <button onclick="checkActivity(this, false)" class="px-3 py-1.5 bg-slate-200 hover:bg-red-500 hover:text-white rounded-lg text-xs font-medium transition">KEWAJIBAN</button>
+                        </div>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="p-4 border rounded-xl bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <span class="text-xs font-semibold text-slate-700">2. Membayar pajak kendaraan motor tepat pada waktunya.</span>
+                        <div class="flex space-x-2">
+                            <button onclick="checkActivity(this, false)" class="px-3 py-1.5 bg-slate-200 hover:bg-emerald-500 hover:text-white rounded-lg text-xs font-medium transition">HAK</button>
+                            <button onclick="checkActivity(this, true)" class="px-3 py-1.5 bg-slate-200 hover:bg-red-500 hover:text-white rounded-lg text-xs font-medium transition">KEWAJIBAN</button>
+                        </div>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="p-4 border rounded-xl bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <span class="text-xs font-semibold text-slate-700">3. Menjaga ketertiban umum dan menaati peraturan lalu lintas.</span>
+                        <div class="flex space-x-2">
+                            <button onclick="checkActivity(this, false)" class="px-3 py-1.5 bg-slate-200 hover:bg-emerald-500 hover:text-white rounded-lg text-xs font-medium transition">HAK</button>
+                            <button onclick="checkActivity(this, true)" class="px-3 py-1.5 bg-slate-200 hover:bg-red-500 hover:text-white rounded-lg text-xs font-medium transition">KEWAJIBAN</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. QUIZ / LATIHAN SOAL SECTION -->
+        <section id="quiz" class="hidden animate-fade-in max-w-3xl mx-auto space-y-6">
+            <!-- Header & Progress -->
+            <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 flex flex-col space-y-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold text-brandRed uppercase tracking-wider">Evaluation Test</span>
+                    <span class="text-xs font-bold text-slate-500">Soal <span id="currentQuestionNum">1</span> dari <span id="totalQuestionsNum">20</span></span>
+                </div>
+                <!-- Progress Bar -->
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <div id="quizProgressBar" class="bg-brandRed h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <!-- Question Box -->
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-slate-100 space-y-6">
+                <h3 id="questionText" class="text-base md:text-lg font-bold text-slate-800 leading-relaxed">
+                    Loading Question...
+                </h3>
+
+                <!-- Options -->
+                <div id="optionsContainer" class="space-y-3">
+                    <!-- Dynamic Options Inserted Here -->
+                </div>
+
+                <!-- Instant Feedback Area -->
+                <div id="feedbackContainer" class="hidden p-4 rounded-xl border text-xs md:text-sm animate-fade-in">
+                    <div id="feedbackHeader" class="font-bold mb-1"></div>
+                    <div id="feedbackText" class="text-slate-600"></div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="flex justify-end pt-4 border-t">
+                    <button id="nextBtn" onclick="nextQuestion()" class="hidden px-6 py-2.5 bg-brandRed hover:bg-brandRedDark text-white font-semibold text-sm rounded-xl shadow transition">
+                        Soal Berikutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. HASIL EVALUASI SECTION -->
+        <section id="evaluasi" class="hidden animate-fade-in max-w-2xl mx-auto text-center space-y-6">
+            <div class="bg-white p-8 rounded-3xl shadow-2xl border border-slate-100 space-y-6">
+                <div class="w-20 h-20 bg-red-100 text-brandRed rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800">Hasil Evaluasi Belajar</h2>
+                    <p class="text-xs text-slate-500 mt-1">Siswa: <span id="evalStudentName" class="font-bold text-slate-700">Budi</span></p>
+                </div>
+
+                <!-- Score Big Badge -->
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                    <span class="text-xs uppercase font-semibold text-slate-400">Nilai Akhir Kamu</span>
+                    <div id="evalScore" class="text-5xl font-extrabold text-brandRed my-2">0</div>
+                    <span id="evalCategory" class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-slate-200 text-slate-700">
+                        Kategori: -
+                    </span>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-100">
+                        <span class="text-xs text-slate-500 block">Jawaban Benar</span>
+                        <span id="evalCorrect" class="text-xl font-bold text-emerald-600">0</span>
+                    </div>
+                    <div class="p-4 bg-red-50 rounded-xl border border-red-100">
+                        <span class="text-xs text-slate-500 block">Jawaban Salah</span>
+                        <span id="evalWrong" class="text-xl font-bold text-red-600">0</span>
+                    </div>
+                </div>
+
+                <!-- Motivation Message -->
+                <p id="evalMotivation" class="text-xs md:text-sm text-slate-600 italic bg-amber-50 p-4 rounded-xl border border-amber-100">
+                    "Tetap semangat belajar Pendidikan Pancasila!"
+                </p>
+
+                <!-- Actions -->
+                <div class="flex flex-col sm:flex-row gap-3 justify-center pt-4">
+                    <button onclick="startQuiz()" class="px-6 py-3 bg-brandRed hover:bg-brandRedDark text-white font-bold text-sm rounded-xl shadow transition">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> Ulangi Latihan
+                    </button>
+                    <button onclick="showSection('dashboard')" class="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm rounded-xl transition">
+                        <i class="fa-solid fa-house mr-1"></i> Menu Utama
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-4 text-center border-t border-slate-800 mt-8">
+        <p>© 2026 Media Pembelajaran Interaktif (PMI) - Pendidikan Pancasila Kelas IX SMP / Fase D</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // GLOBAL STATE
+        let studentName = "";
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctCount = 0;
+        let wrongCount = 0;
+        let selectedQuestions = [];
+
+        // 20 SOAL EVALUASI PENDIDIKAN PANCASILA (FASE D / KELAS IX)
+        const quizBank = [
+            {
+                q: "Segala sesuatu yang mutlak menjadi milik seseorang dan penggunaannya tergantung pada orang tersebut dijamin oleh hukum dinamakan...",
+                options: ["Kewajiban", "Hak", "Tanggung Jawab", "Norma"],
+                answer: 1,
+                explain: "Hak adalah sesuatu yang mutlak milik kita dan penggunaannya dijamin oleh aturan hukum."
+            },
+            {
+                q: "Sesuatu yang harus dilaksanakan dengan penuh rasa tanggung jawab sebelum menuntut hak dinamakan...",
+                options: ["Kewajiban", "Hak", "Wewenang", "Kekuasaan"],
+                answer: 0,
+                explain: "Kewajiban adalah tindakan yang wajib dilaksanakan penuh tanggung jawab sebelum menuntut hak."
+            },
+            {
+                q: "Pasal dalam UUD NRI Tahun 1945 yang mengatur bahwa setiap warga negara berhak mendapatkan pendidikan adalah...",
+                options: ["Pasal 27 ayat (1)", "Pasal 29 ayat (2)", "Pasal 31 ayat (1)", "Pasal 30 ayat (1)"],
+                answer: 2,
+                explain: "Pasal 31 ayat (1) menyatakan bahwa setiap warga negara berhak mendapat pendidikan."
+            },
+            {
+                q: "Pasal 27 Ayat (1) UUD 1945 menegaskan kesamaan kedudukan warga negara di dalam...",
+                options: ["Hukum dan Pemerintahan", "Ekonomi dan Bisnis", "Kebudayaan dan Olahraga", "Pertahanan saja"],
+                answer: 0,
+                explain: "Pasal 27 ayat (1) berbunyi bahwa segala warga negara bersamaan kedudukannya di dalam hukum dan pemerintahan."
+            },
+            {
+                q: "Setiap warga negara berhak dan wajib ikut serta dalam upaya pembelaan negara. Pernyataan ini tertuang dalam...",
+                options: ["Pasal 27 ayat (3)", "Pasal 28A", "Pasal 34", "Pasal 29 ayat (1)"],
+                answer: 0,
+                explain: "Pasal 27 ayat (3) menegaskan hak dan kewajiban warga negara dalam upaya pembelaan negara."
+            },
+            {
+                q: "Menjaga kebersihan dan tidak merusak fasilitas kelas merupakan contoh kewajiban siswa di lingkungan...",
+                options: ["Keluarga", "Sekolah", "Masyarakat", "Berbangsa"],
+                answer: 1,
+                explain: "Merawat lingkungan dan fasilitas kelas adalah kewajiban peserta didik di lingkungan sekolah."
+            },
+            {
+                q: "Salah satu bentuk kewajiban warga negara dalam mendukung pembangunan nasional adalah...",
+                options: ["Menuntut bantuan finansial", "Membayar pajak tepat waktu", "Mengabaikan lalu lintas", "Merusak fasilitas publik"],
+                answer: 1,
+                explain: "Membayar pajak secara jujur dan tepat waktu merupakan kewajiban utama untuk pembangunan negara."
+            },
+            {
+                q: "Jaminan kebebasan memeluk agama dan beribadah menurut agamanya masing-masing dijamin dalam UUD 1945...",
+                options: ["Pasal 29 ayat (2)", "Pasal 31 ayat (2)", "Pasal 27 ayat (2)", "Pasal 34"],
+                answer: 0,
+                explain: "Pasal 29 ayat (2) memberikan jaminan kemerdekaan beragama dan beribadah bagi seluruh rakyat."
+            },
+            {
+                q: "Berikut ini yang merupakan contoh sikap menghormati hak orang lain saat berdiskusi adalah...",
+                options: ["Memotong pembicaraan orang lain", "Mendengarkan pendapat orang lain dengan sopan", "Memaksa orang lain mengikuti pendapat kita", "Mengabaikan hasil musyawarah"],
+                answer: 1,
+                explain: "Mendengarkan pendapat orang lain dengan bersikap sopan adalah wujud menghormati hak berpendapat."
+            },
+            {
+                q: "Menikmati udara bersih dan lingkungan tempat tinggal yang sehat merupakan contoh...",
+                options: ["Hak warga negara", "Kewajiban warga negara", "Tuntutan hukum", "Sanksi sosial"],
+                answer: 0,
+                explain: "Mendapatkan lingkungan hidup yang baik dan sehat adalah hak warga negara yang dilindungi undang-undang."
+            },
+            {
+                q: "Sikap pengabaian kewajiban yang dapat mengganggu ketertiban umum adalah...",
+                options: ["Menerobos lampu merah di jalan raya", "Belajar dengan rajin", "Menolong teman", "Melakukan sistem ronda malam"],
+                answer: 0,
+                explain: "Menerobos lampu merah merupakan tindakan pengabaian kewajiban menaati lalu lintas."
+            },
+            {
+                q: "Hubungan antara hak dan kewajiban warga negara bersifat...",
+                options: ["Berlawanan", "Saling terpisah", "Timbal balik (Kausalitas)", "Tidak berhubungan"],
+                answer: 2,
+                explain: "Hak dan kewajiban memiliki hubungan sebab-akibat (kausalitas) dan harus dijalankan secara seimbang."
+            },
+            {
+                q: "Tindakan perundungan (bullying) di sekolah merupakan bentuk...",
+                options: ["Pelanggaran hak orang lain", "Pemenuhan hak siswa", "Kewajiban bersama", "Bentuk kebebasan berpendapat"],
+                answer: 0,
+                explain: "Perundungan merupakan pelanggaran atas hak rasa aman dan kehormatan orang lain."
+            },
+            {
+                q: "Pasal 30 Ayat (1) UUD NRI Tahun 1945 mengatur tentang...",
+                options: ["Hak mendapat pendidikan", "Kewajiban membela negara dalam pertahanan dan keamanan", "Hak atas pekerjaan", "Fakir miskin yang dipelihara negara"],
+                answer: 1,
+                explain: "Pasal 30 ayat (1) menegaskan hak dan kewajiban warga negara dalam usaha pertahanan dan keamanan negara."
+            },
+            {
+                q: "Berikut yang bukan merupakan tindakan menghormati hak orang lain adalah...",
+                options: ["Tidak membuat gaduh saat tetangga beribadah", "Membuang sampah di pekarangan rumah tetangga", "Mengantre dengan tertib", "Memberikan kesempatan orang lain bicara"],
+                answer: 1,
+                explain: "Membuang sampah sembarangan melanggar hak orang lain untuk mendapatkan lingkungan bersih."
+            },
+            {
+                q: "Fakir miskin dan anak-anak yang terlantar dipelihara oleh negara. Pernyataan ini diatur dalam UUD 1945...",
+                options: ["Pasal 34", "Pasal 33", "Pasal 28", "Pasal 27"],
+                answer: 0,
+                explain: "Pasal 34 UUD 1945 menegaskan tanggung jawab negara terhadap fakir miskin dan anak terlantar."
+            },
+            {
+                q: "Mendapatkan kasih sayang dan perlindungan dari orang tua merupakan contoh...",
+                options: ["Hak di lingkungan masyarakat", "Hak di lingkungan keluarga", "Kewajiban di rumah", "Kewajiban berbangsa"],
+                answer: 1,
+                explain: "Kasih sayang dan perlindungan orang tua adalah hak anak di dalam lingkungan keluarga."
+            },
+            {
+                q: "Setiap warga negara wajib mengikuti pendidikan dasar dan pemerintah wajib membiayainya. Pernyataan ini termuat dalam...",
+                options: ["Pasal 31 ayat (2)", "Pasal 28D", "Pasal 29 ayat (1)", "Pasal 27 ayat (3)"],
+                answer: 0,
+                explain: "Pasal 31 ayat (2) menyatakan kewajiban mengikuti pendidikan dasar yang dibiayai oleh pemerintah."
+            },
+            {
+                q: "Manakah contoh pelaksanaan kewajiban di lingkungan masyarakat?",
+                options: ["Ikut ronda malam / siskamling", "Meminta hadiah ulang tahun", "Tidur tepat waktu", "Mendapat nilai bagus"],
+                answer: 0,
+                explain: "Ikut kegiatan siskamling merupakan contoh nyata pelaksanaan kewajiban menjaga keamanan lingkungan."
+            },
+            {
+                q: "Mengapa kita harus melaksanakan kewajiban terlebih dahulu sebelum menuntut hak?",
+                options: ["Agar tercipta keseimbangan dan keadilan sosial", "Agar dipuji teman", "Supaya mendapatkan hadiah", "Agar tidak dihukum guru"],
+                answer: 0,
+                explain: "Keseimbangan hak dan kewajiban sangat penting agar tercipta keharmonisan, keadilan, dan keteraturan sosial."
+            }
+        ];
+
+        // NAVIGATION LOGIC
+        function showSection(sectionId) {
+            const sections = ['landing', 'dashboard', 'petunjuk', 'tujuan', 'materi', 'video', 'aktivitas', 'quiz', 'evaluasi'];
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            document.getElementById(sectionId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function startApp() {
+            const input = document.getElementById('studentNameInput').value.trim();
+            if (input === "") {
+                alert("Silakan masukkan nama kamu terlebih dahulu!");
+                return;
+            }
+            studentName = input;
+            document.getElementById('displayStudentName').innerText = studentName;
+            document.getElementById('dashStudentName').innerText = studentName;
+            document.getElementById('userBadge').classList.remove('hidden');
+            document.getElementById('userBadge').classList.add('flex');
+            showSection('dashboard');
+        }
+
+        // MATERI TABS
+        function switchMaterialTab(tabId) {
+            document.querySelectorAll('.mat-tab').forEach(btn => {
+                btn.classList.remove('bg-brandRed', 'text-white', 'shadow');
+                btn.classList.add('bg-white', 'text-slate-600');
+            });
+            document.getElementById('tab-' + tabId).classList.remove('bg-white', 'text-slate-600');
+            document.getElementById('tab-' + tabId).classList.add('bg-brandRed', 'text-white', 'shadow');
+
+            document.querySelectorAll('.mat-panel').forEach(panel => panel.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+        }
+
+        // SIMULASI / AKTIVITAS INTERAKTIF
+        function checkActivity(btn, isCorrect) {
+            const parent = btn.parentElement;
+            if (isCorrect) {
+                btn.className = "px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-medium shadow";
+                btn.innerHTML = "<i class='fa-solid fa-check mr-1'></i> Benar!";
+            } else {
+                btn.className = "px-3 py-1.5 bg-red-600 text-white rounded-lg text-xs font-medium shadow";
+                btn.innerHTML = "<i class='fa-solid fa-xmark mr-1'></i> Kurang Tepat";
+            }
+        }
+
+        // QUIZ SYSTEM LOGIC
+        function startQuiz() {
+            if (!studentName) {
+                showSection('landing');
+                return;
+            }
+            // Shuffle & setup questions
+            selectedQuestions = [...quizBank].sort(() => Math.random() - 0.5);
+            currentQuestionIndex = 0;
+            score = 0;
+            correctCount = 0;
+            wrongCount = 0;
+            showSection('quiz');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = selectedQuestions[currentQuestionIndex];
+            document.getElementById('currentQuestionNum').innerText = currentQuestionIndex + 1;
+            document.getElementById('totalQuestionsNum').innerText = selectedQuestions.length;
+            
+            // Progress bar
+            const progressPct = ((currentQuestionIndex) / selectedQuestions.length) * 100;
+            document.getElementById('quizProgressBar').style.width = progressPct + '%';
+
+            document.getElementById('questionText').innerText = (currentQuestionIndex + 1) + ". " + q.q;
+
+            // Render Options
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = "";
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "option-btn w-full p-4 rounded-xl border border-slate-200 text-left text-xs md:text-sm font-medium text-slate-700 hover:bg-slate-50 hover:border-brandRed transition flex items-center justify-between";
+                btn.innerHTML = `<span><strong class="mr-2 text-brandRed">${String.fromCharCode(65 + idx)}.</strong> ${opt}</span>`;
+                btn.onclick = () => selectAnswer(idx);
+                container.appendChild(btn);
+            });
+
+            // Reset Feedback & Next Button
+            document.getElementById('feedbackContainer').classList.add('hidden');
+            document.getElementById('nextBtn').classList.add('hidden');
+        }
+
+        function selectAnswer(selectedIndex) {
+            const q = selectedQuestions[currentQuestionIndex];
+            const optionBtns = document.querySelectorAll('.option-btn');
+
+            // Disable all buttons after selection
+            optionBtns.forEach(btn => btn.disabled = true);
+
+            const feedbackContainer = document.getElementById('feedbackContainer');
+            const feedbackHeader = document.getElementById('feedbackHeader');
+            const feedbackText = document.getElementById('feedbackText');
+
+            if (selectedIndex === q.answer) {
+                score += 5;
+                correctCount++;
+                optionBtns[selectedIndex].classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-800');
+                
+                feedbackContainer.className = "p-4 rounded-xl border border-emerald-200 bg-emerald-50 text-xs md:text-sm animate-fade-in";
+                feedbackHeader.className = "font-bold text-emerald-700 mb-1";
+                feedbackHeader.innerHTML = "<i class='fa-solid fa-circle-check mr-1'></i> Jawaban Kamu Benar!";
+            } else {
+                wrongCount++;
+                optionBtns[selectedIndex].classList.add('bg-red-100', 'border-red-500', 'text-red-800');
+                optionBtns[q.answer].classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-800');
+
+                feedbackContainer.className = "p-4 rounded-xl border border-red-200 bg-red-50 text-xs md:text-sm animate-fade-in";
+                feedbackHeader.className = "font-bold text-red-700 mb-1";
+                feedbackHeader.innerHTML = "<i class='fa-solid fa-circle-xmark mr-1'></i> Jawaban Kurang Tepat";
+            }
+
+            feedbackText.innerText = q.explain;
+            feedbackContainer.classList.remove('hidden');
+            document.getElementById('nextBtn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < selectedQuestions.length) {
+                loadQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function finishQuiz() {
+            showSection('evaluasi');
+            const finalScore = Math.round((correctCount / selectedQuestions.length) * 100);
+            
+            document.getElementById('evalStudentName').innerText = studentName;
+            document.getElementById('evalScore').innerText = finalScore;
+            document.getElementById('evalCorrect').innerText = correctCount;
+            document.getElementById('evalWrong').innerText = wrongCount;
+
+            const catEl = document.getElementById('evalCategory');
+            const motEl = document.getElementById('evalMotivation');
+
+            if (finalScore >= 90) {
+                catEl.className = "inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800";
+                catEl.innerText = "Kategori: Sangat Baik 🌟";
+                motEl.innerText = "Luar biasa! Kamu sangat memahami hak dan kewajiban warga negara. Pertahankan sikap terpuji ini dalam kehidupan sehari-hari!";
+            } else if (finalScore >= 80) {
+                catEl.className = "inline-block px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800";
+                catEl.innerText = "Kategori: Baik 👍";
+                motEl.innerText = "Bagus sekali! Kamu sudah memahami materi ini dengan baik. Tingkatkan terus pemahamanmu!";
+            } else if (finalScore >= 70) {
+                catEl.className = "inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800";
+                catEl.innerText = "Kategori: Cukup 👌";
+                motEl.innerText = "Hasil yang cukup baik! Pelajari kembali poin-poin materi pasal UUD 1945 agar nilaimu semakin sempurna.";
+            } else {
+                catEl.className = "inline-block px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-800";
+                catEl.innerText = "Kategori: Perlu Belajar Kembali 📚";
+                motEl.innerText = "Jangan berkecil hati! Ulangi membaca modul materi dan cobalah latihan soal ini sekali lagi!";
+            }
+        }
+    </script>
+</body>
+</html>
